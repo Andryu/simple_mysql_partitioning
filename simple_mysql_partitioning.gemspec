@@ -1,15 +1,15 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "simple_mysql_paritioning/version"
+require "simple_mysql_partitioning/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "simple_mysql_paritioning"
+  spec.name          = "simple_mysql_partitioning"
   spec.version       = SimpleMysqlParitioning::VERSION
   spec.authors       = ["Shunsuke Andoh"]
   spec.email         = ["shunsuke.andoh@gmail.com"]
 
-  spec.summary       = %q{ Generate paritioning sql for mysql}
+  spec.summary       = %q{ Generate partitioning sql for mysql}
   spec.description   = %q{ simple generate partition sql}
   spec.homepage      = ""
 

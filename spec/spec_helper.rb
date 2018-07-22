@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "simple_mysql_paritioning"
+require "simple_mysql_partitioning"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
