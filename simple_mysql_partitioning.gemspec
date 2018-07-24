@@ -10,16 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = ' Generate partitioning sql for mysql'
   spec.description   = ' simple generate partition sql'
-  spec.homepage      = 'https://github.com/Andryu'
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = 'http://mygemserver.com'
-  else
-    raise 'RubyGems 2.0 or newer is required to protect against ' \
-      'public gem pushes.'
-  end
+  spec.homepage      = 'https://github.com/Andryu/simple_mysql_partitioning'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
