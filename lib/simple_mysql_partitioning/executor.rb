@@ -1,4 +1,3 @@
-
 require 'active_record'
 
 module SimpleMySQLPartitioning

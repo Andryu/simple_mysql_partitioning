@@ -1,4 +1,4 @@
-ActiveRecord::Base.configurations = {'test' => {adapter: 'mysql2', database: ':memory:'}}
+ActiveRecord::Base.configurations = { 'test' => { adapter: 'mysql2', database: ':memory:' } }
 ActiveRecord::Base.establish_connection :test
 
 class CreateAllTables < ActiveRecord::Migration
