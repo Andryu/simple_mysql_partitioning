@@ -1,4 +1,5 @@
 require 'active_record'
+require 'simple_mysql_partitioning/sql'
 
 module SimpleMySQLPartitioning
   class Executor
@@ -9,13 +10,13 @@ module SimpleMySQLPartitioning
     end
 
     def add(less_than_value)
-      add_partition_sql = add_sql(@table_name, @partition_name, less_than_value)
+      add_partition_sql = SQL.add_sql(@table_name, @partition_name, less_than_value)
       @klass.connection.execute(add_partition_sql)
     end
 
     def reorganize(less_than_value, reorganize_partition_name)
       @klass.connection.execute(
-        reorganize_sql(
+        SQL.reorganize_sql(
           @table_name,
           @partition_name, less_than_value,
           reorganize_partition_name
@@ -25,12 +26,12 @@ module SimpleMySQLPartitioning
 
     def exist?
       @klass.connection.select_all(
-        exist_sql(@table_name, @partition_name)
+        SQL.exist_sql(@table_name, @partition_name)
       ).to_hash.present?
     end
 
     def drop
-      @klass.connection.execute(parge_sql(@table_name, @partition_name))
+      @klass.connection.execute(SQL.parge_sql(@table_name, @partition_name))
     end
   end
 end
