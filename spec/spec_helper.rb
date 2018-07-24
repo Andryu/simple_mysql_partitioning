@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'simple_mysql_partitioning'
 
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/support/setup_database.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -12,5 +12,9 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.after(:all) do
+    Dir["#{File.dirname(__FILE__)}/support/drop_database.rb"].each { |f| require f }
   end
 end
