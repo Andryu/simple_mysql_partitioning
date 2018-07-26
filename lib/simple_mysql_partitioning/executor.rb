@@ -10,11 +10,13 @@ module SimpleMySQLPartitioning
     end
 
     def add(less_than_value)
+      return if exist?
       add_partition_sql = SQL.add_sql(@table_name, @partition_name, less_than_value)
       @klass.connection.execute(add_partition_sql)
     end
 
     def reorganize(less_than_value, reorganize_partition_name)
+      return if exist?
       @klass.connection.execute(
         SQL.reorganize_sql(
           @table_name,
@@ -31,6 +33,7 @@ module SimpleMySQLPartitioning
     end
 
     def drop
+      return unless exist?
       @klass.connection.execute(SQL.parge_sql(@table_name, @partition_name))
     end
   end
