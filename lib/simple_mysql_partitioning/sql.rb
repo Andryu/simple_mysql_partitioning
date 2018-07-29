@@ -1,7 +1,7 @@
 module SimpleMySQLPartitioning
   class SQL
     class << self
-      def exist_sql(table_name, partition_name)
+      def exists_sql(table_name, partition_name)
         "SELECT
             table_schema,
             table_name,
@@ -16,15 +16,15 @@ module SimpleMySQLPartitioning
 
       def add_sql(table_name, partition_name, value)
         "ALTER TABLE #{table_name}
-            ADD PARTITION ( PARTITION #{partition_name}
-            VALUES LESS THAN ('#{value}'));"
+           ADD PARTITION ( PARTITION #{partition_name} VALUES LESS THAN ('#{value}'));"
       end
 
       def reorganize_sql(table_name, partition_name, value, reorganize_partition_name, max_value = 'MAXVALUE')
         "ALTER TABLE #{table_name}
-            REORGANIZE PARTITION #{reorganize_partition_name} INTO (
-            PARTITION #{partition_name} VALUES LESS THAN ('#{value}'),
-            PARTITION #{reorganize_partition_name} VALUES LESS THAN #{max_value});"
+           REORGANIZE PARTITION #{reorganize_partition_name} INTO (
+             PARTITION #{partition_name} VALUES LESS THAN ('#{value}'),
+             PARTITION #{reorganize_partition_name} VALUES LESS THAN #{max_value}
+           );"
       end
 
       def parge_sql(table_name, partition_name)
