@@ -39,8 +39,8 @@ RSpec.describe SimpleMySQLPartitioning::Range do
   describe '#reorganize' do
     let(:partition_name) { 'p201808' }
     let(:value)          { '2018-09-01' }
-    let(:reorganize_partition_name) { 'p201812' }
-    let(:reorganize_partition_value) { '2019-01-01' }
+    let(:reorganize_partition_name) { 'p999999' }
+    let(:reorganize_partition_value) { 'MAXVALUE' }
 
     before do
       klass.partition.add([[reorganize_partition_name, reorganize_partition_value]]) \
@@ -48,7 +48,7 @@ RSpec.describe SimpleMySQLPartitioning::Range do
     end
 
     it 'has reorganized partition' do
-      klass.partition.reorganize([[partition_name, value]], reorganize_partition_name)
+      klass.partition.reorganize([[partition_name, value]], reorganize_partition_name, reorganize_partition_value)
       expect(klass.partition.exists?(partition_name)).to be_truthy
       expect(klass.partition.exists?(reorganize_partition_name)).to be_truthy
     end

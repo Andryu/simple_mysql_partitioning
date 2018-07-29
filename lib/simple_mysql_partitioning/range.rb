@@ -11,13 +11,14 @@ module SimpleMySQLPartitioning
       end
     end
 
-    def reorganize(pairs_name_with_value, reorganize_partition_name)
+    def reorganize(pairs_name_with_value, reorganize_partition_name, reorganize_partition_value = 'MAXVALUE')
       pairs_name_with_value.map do |pair|
         klass.connection.execute(
           SQL.reorganize_sql(
             table_name,
             pair.first, pair.last,
-            reorganize_partition_name
+            reorganize_partition_name,
+            reorganize_partition_value
           )
         )
       end
