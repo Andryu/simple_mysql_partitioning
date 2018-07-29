@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_mysql_partitioning'
+gem 'simple_mysql_partitioning', '~> 0.2.0'
 ```
 
 And then execute:
@@ -22,7 +22,36 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+class DailyReport < ActiveRecord::Base
+  include SimpleMySQLPartitioning
+
+  # arg1: column
+  # type: partitiong type
+  partitioning_by :day, type: :range
+end
+
+
+# partition name, less than value
+pairs_name_with_values = [
+  ['p201808', '2018-09-01']
+]
+
+# add partition
+DailyReport.partition.add(pairs_name_with_values)
+
+# reorganize partition
+# If you want to reorganize partition, use this method and set reorganize partition name to second arg.
+DailyReport.partition.reorganize(pairs_name_with_values, 'p999999')
+
+# drop
+DailyReport.partition.drop('p201808')
+
+# exists?
+DailyReport.partition.exists?('p201808')
+```
+
+We support only range partitioning.
 
 ## Development
 
