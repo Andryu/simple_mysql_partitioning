@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 class DailyReport < ActiveRecord::Base
+  include SimpleMySQLPartitioning
   self.table_name = 'daily_reports'
+
+  partition :day, by: :range
 end
 
 RSpec.describe SimpleMySQLPartitioning::Executor do
@@ -29,6 +32,14 @@ RSpec.describe SimpleMySQLPartitioning::Executor do
     it 'has new partition' do
       instance.drop
       expect(instance.exist?).to eq false
+    end
+  end
+
+  describe '.partition' do
+    it 'include module' do
+      expect(DailyReport.respond_to?(:partition)).to eq true
+      expect(DailyReport.partition_config[:column]).to eq :day
+      expect(DailyReport.partition_config[:by]).to eq :range
     end
   end
 end
