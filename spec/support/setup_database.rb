@@ -17,7 +17,7 @@ class CreateAllTables < ActiveRecord::Migration[4.2]
                   PARTITION p201704 VALUES LESS THAN ('2018-05-01') ENGINE = InnoDB
              )
     "
-                  #PARTITION p999999 VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB
+    # PARTITION p999999 VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB
     execute partition
   end
 end
