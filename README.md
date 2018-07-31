@@ -43,7 +43,7 @@ DailyReport.partition.add(pairs_name_with_values)
 # reorganize partition
 # If you want to reorganize partition, use this method and set reorganize partition name to second arg.
 # Reorganize partitiong default value is 'MAXVALUE'.
-DailyReport.partition.reorganize(pairs_name_with_values, 'p201810', '2018-11-01')
+DailyReport.partition.reorganize(pairs_name_with_values, 'p999999', 'MAXVALUE')
 
 # drop
 DailyReport.partition.drop('p201808')
