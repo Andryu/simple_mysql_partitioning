@@ -5,3 +5,5 @@ cache: bundler
 rvm:
   - 2.5.0
 before_install: gem install bundler -v 1.16.3
+script:
+   bundle exec rake db:setup RAILS_ENV=test
