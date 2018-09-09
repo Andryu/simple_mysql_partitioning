@@ -13,7 +13,6 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    Dir["#{File.dirname(__FILE__)}/support/drop_database.rb"].each { |f| require f }
     Dir["#{File.dirname(__FILE__)}/support/setup_database.rb"].each { |f| require f }
   end
 
