@@ -26,45 +26,56 @@ RSpec.describe SimpleMySQLPartitioning::Range do
     }
   end
 
-  describe '#add' do
+  describe '#create' do
     let(:partition_name) { 'p201807' }
     let(:value)          { '2018-08-01' }
 
     it 'has new partition' do
-      klass.partition.add([[partition_name, value]])
+      klass.partition.create([[partition_name, value]])
       expect(klass.partition.exists?(partition_name)).to be_truthy
+      #expect(klass.partition.exists?()).to be_truthy
     end
   end
 
-  describe '#reorganize' do
-    let(:partition_name) { 'p201808' }
-    let(:value)          { '2018-09-01' }
-    let(:reorganize_partition_name) { 'p999999' }
-    let(:reorganize_partition_value) { 'MAXVALUE' }
+  #describe '#add' do
+  #  let(:partition_name) { 'p201807' }
+  #  let(:value)          { '2018-08-01' }
 
-    before do
-      klass.partition.add([[reorganize_partition_name, reorganize_partition_value]]) \
-        unless klass.partition.exists?(reorganize_partition_name)
-    end
+  #  it 'has new partition' do
+  #    klass.partition.add([[partition_name, value]])
+  #    expect(klass.partition.exists?(partition_name)).to be_truthy
+  #  end
+  #end
 
-    it 'has reorganized partition' do
-      klass.partition.reorganize([[partition_name, value]], reorganize_partition_name, reorganize_partition_value)
-      expect(klass.partition.exists?(partition_name)).to be_truthy
-      expect(klass.partition.exists?(reorganize_partition_name)).to be_truthy
-    end
-  end
+  #describe '#reorganize' do
+  #  let(:partition_name) { 'p201808' }
+  #  let(:value)          { '2018-09-01' }
+  #  let(:reorganize_partition_name) { 'p999999' }
+  #  let(:reorganize_partition_value) { 'MAXVALUE' }
 
-  describe '#drop' do
-    let(:partition_name) { 'p201808' }
-    let(:value)          { '2018-09-01' }
-    before do
-      klass.partition.add([[partition_name, value]]) \
-        unless klass.partition.exists?(partition_name)
-    end
+  #  before do
+  #    klass.partition.add([[reorganize_partition_name, reorganize_partition_value]]) \
+  #      unless klass.partition.exists?(reorganize_partition_name)
+  #  end
 
-    it 'dropped partition' do
-      klass.partition.drop(partition_name)
-      expect(klass.partition.exists?(partition_name)).to be_falsey
-    end
-  end
+  #  it 'has reorganized partition' do
+  #    klass.partition.reorganize([[partition_name, value]], reorganize_partition_name, reorganize_partition_value)
+  #    expect(klass.partition.exists?(partition_name)).to be_truthy
+  #    expect(klass.partition.exists?(reorganize_partition_name)).to be_truthy
+  #  end
+  #end
+
+  #describe '#drop' do
+  #  let(:partition_name) { 'p201808' }
+  #  let(:value)          { '2018-09-01' }
+  #  before do
+  #    klass.partition.add([[partition_name, value]]) \
+  #      unless klass.partition.exists?(partition_name)
+  #  end
+
+  #  it 'dropped partition' do
+  #    klass.partition.drop(partition_name)
+  #    expect(klass.partition.exists?(partition_name)).to be_falsey
+  #  end
+  #end
 end
