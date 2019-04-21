@@ -9,6 +9,7 @@ services:
   app:
     environment:
       BUNDLE_PATH: 'bundle'
+      MYSQL_DB_HOST: 'mysql'
     build: docker/app
     volumes:
       - .:/app

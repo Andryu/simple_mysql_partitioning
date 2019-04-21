@@ -1,9 +1,12 @@
-client = Mysql2::Client.new(host: 'mysql', username: 'root', password: '')
+host = ENV['MYSQL_DB_HOST'] || '127.0.0.1'
+client = Mysql2::Client.new(host: host, username: 'root', password: '')
 client.query('CREATE DATABASE simple_mysql_partitioning_test;')
 client.close
 
 ActiveRecord::Base.configurations = YAML.load_file('spec/dummy/database.yml')
-ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'])
+config = ActiveRecord::Base.configurations['test']
+config['host'] = host
+ActiveRecord::Base.establish_connection(config)
 
 class CreateAllTables < ActiveRecord::Migration[4.2]
   def self.up
