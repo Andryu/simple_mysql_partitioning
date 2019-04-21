@@ -12,13 +12,6 @@ class CreateAllTables < ActiveRecord::Migration[4.2]
       t.date   :day
       t.text   :imp
     end
-    #partition = "ALTER TABLE daily_reports
-    #              PARTITION BY RANGE  COLUMNS(`day`)  (
-    #              PARTITION p201704 VALUES LESS THAN ('2018-05-01') ENGINE = InnoDB
-    #         )
-    #"
-    ## PARTITION p999999 VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB
-    #execute partition
   end
 end
 
