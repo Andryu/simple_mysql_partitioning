@@ -4,6 +4,16 @@ require 'simple_mysql_partitioning/base_partitioning'
 
 module SimpleMySQLPartitioning
   class Range < BasePartitioning
+    def create(pairs_name_with_value)
+      sql = SQL.create_sql(
+        table_name,
+        klass.partition_config[:column],
+        pairs_name_with_value, true
+      )
+
+      klass.connection.execute(sql)
+    end
+
     def add(pairs_name_with_value)
       pairs_name_with_value.map do |pair|
         add_partition_sql = SQL.add_sql(table_name, pair.first, pair.last)

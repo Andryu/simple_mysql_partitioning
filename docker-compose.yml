@@ -1,15 +1,23 @@
-version: '2'
+version: '3'
 services:
-  datastore:
-    image: busybox
-    volumes:
-      - bundle:/bundle
   mysql:
     image: mysql:5.7
     ports:
-      - "3307:3306"
+      - "3306:3306"
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  app:
+    environment:
+      BUNDLE_PATH: 'bundle'
+      MYSQL_DB_HOST: 'mysql'
+    build: docker/app
+    volumes:
+      - .:/app
+      - bundle-vol:/bundle:cached
+    command: irb
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mysql
 volumes:
-  bundle:
-    driver: local
+  bundle-vol:

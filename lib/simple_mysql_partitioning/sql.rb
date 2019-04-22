@@ -1,17 +1,34 @@
 module SimpleMySQLPartitioning
   class SQL
+
+    PARTITION_RANGE_LESS_VALUE =
+      'PARTITION %{name} VALUES LESS THAN ("%{value}")'.freeze
+
     class << self
       def exists_sql(table_name, partition_name)
         "SELECT
             table_schema,
             table_name,
             partition_name,
-            partition_ordinal_position,
-            table_rows
+            partition_ordinal_position, table_rows
           FROM information_schema.partitions
           WHERE table_name='#{table_name}'
             AND partition_name='#{partition_name}'
           LIMIT 1;"
+      end
+
+      def create_sql(table_name, column, pairs_name_with_value, max_value = true)
+        alter = "ALTER TABLE #{table_name} PARTITION BY RANGE COLUMNS(#{column})"
+
+        partitions = pairs_name_with_value.map do |pair|
+          format(
+            PARTITION_RANGE_LESS_VALUE,
+            name: pair.first,
+            value: pair.last
+          )
+        end
+
+        alter + ' ' + "(#{partitions.join(',')})"
       end
 
       def add_sql(table_name, partition_name, value)
