@@ -39,6 +39,11 @@ pairs_name_with_values = [
   ['p201808', '2018-09-01']
 ]
 
+# create partition
+DailyReport.partition.create(pairs_name_with_values)
+
+NOTE: No support MAXVALUE, please use add method after created partition.
+
 # add partition
 DailyReport.partition.add(pairs_name_with_values)
 
