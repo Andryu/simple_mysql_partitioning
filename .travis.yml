@@ -3,10 +3,8 @@ sudo: false
 language: ruby
 services:
   - mysql
-  - docker
 rvm:
   - 2.5.0
-before_install:
-  - gem install bundler
 script:
+  - bundle -v
   - bundle exec rspec
