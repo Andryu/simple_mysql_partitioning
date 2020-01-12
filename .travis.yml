@@ -1,11 +1,17 @@
 ---
 sudo: false
 language: ruby
-service: docker
+services:
+  - mysql
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
 rvm:
   - 2.5.0
 before_install:
-  - docker-compose up -d mysql
   - gem install bundler -v 1.16.3
 script:
   - bundle exec rspec
