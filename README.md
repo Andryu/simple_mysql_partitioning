@@ -76,4 +76,4 @@ ex) BUNDLE_GEMFILE=gemfiles/Gemfile.rails-6.0 bundle exec rspec
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/simple_mysql_partitioning.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Andryu/simple_mysql_partitioning.
