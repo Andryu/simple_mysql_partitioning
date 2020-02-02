@@ -8,7 +8,10 @@ config = ActiveRecord::Base.configurations['test']
 config['host'] = host
 ActiveRecord::Base.establish_connection(config)
 
-class CreateAllTables < ActiveRecord::Migration[4.2]
+# 4.2と5.xで指定の仕方が変わったため
+# 参考: https://github.com/sue445/activerecord-compatible_legacy_migration/blob/v0.1.1/lib/active_record/compatible_legacy_migration.rb
+# Rails 5.0以降だと ActiveRecord::Migration[4.2] を、Rails 5未満だと ActiveRecord::Migration を返す
+class CreateAllTables < ActiveRecord::CompatibleLegacyMigration.migration_class
   def self.up
     create_table(:daily_reports, id: false, primary_key: %i[id day]) do |t|
       t.integer :id
