@@ -13,6 +13,7 @@ services:
     build: docker/app
     volumes:
       - .:/app
+      - ~/.gem/credentials:/root/.gem/credentials
       - bundle-vol:/bundle:cached
     command: irb
     tty: true
