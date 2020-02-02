@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.5.0'
 
   spec.add_dependency 'activerecord', '> 4.2.5'
+  spec.add_development_dependency 'activerecord-compatible_legacy_migration'
   spec.add_development_dependency 'mysql2', '>= 0.5.0'
   spec.add_development_dependency 'rake', '>= 10.0'
   spec.add_development_dependency 'rspec', '>= 3.0'
