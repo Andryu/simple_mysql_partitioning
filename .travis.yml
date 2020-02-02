@@ -28,7 +28,7 @@ bundler_args: --jobs=3 --retry=3
 before_install:
   # 参考: https://docs.travis-ci.com/user/languages/ruby/#bundler
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
-  - gem install bundler -v 1.17.2 --no-rdoc --no-ri
+  - gem install bundler -v 1.17.2
 script:
   - bundle exec rspec
 
