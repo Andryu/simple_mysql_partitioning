@@ -4,3 +4,6 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # Specify your gem's dependencies in simple_mysql_partitioning.gemspec
 gemspec
+
+# use only test
+gem 'activerecord-compatible_legacy_migration'
