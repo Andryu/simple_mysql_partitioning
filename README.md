@@ -11,7 +11,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_mysql_partitioning', '~> 0.2.0'
+gem 'simple_mysql_partitioning', '~> 1.0.0'
 ```
 
 And then execute:
