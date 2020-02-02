@@ -23,9 +23,12 @@ gemfile:
 matrix:
   allow-failures:
     - rvm: ruby-head
-  include:
+  exclude:
     - rvm: 2.3.7
-      gemfile: gemfiles/Gemfile.rails-4.2.1
+      gemfile: gemfiles/Gemfile.rails-6.0
+
+    - rvm: 2.3.7
+      gemfile: ruby-head
 
 jobs:
   fast_finish: true
