@@ -1,11 +1,43 @@
 ---
-sudo: false
 language: ruby
-service: docker
+services:
+  - mysql
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
 rvm:
+  - 2.3.7
   - 2.5.0
+  - 2.6.0
+  - ruby-head
+
+gemfile:
+  - Gemfile
+  - gemfiles/Gemfile.rails-4.2.1
+  - gemfiles/Gemfile.rails-5.0
+  - gemfiles/Gemfile.rails-6.0
+
+matrix:
+  allow-failures:
+    - rvm: ruby-head
+  exclude:
+    - rvm: 2.3.7
+      gemfile: gemfiles/Gemfile.rails-6.0
+
+jobs:
+  fast_finish: true
+
+bundler_args: --jobs=3 --retry=3
+
 before_install:
-  - docker-compose up -d
-  - gem install bundler -v 1.16.3
+  # 参考: https://docs.travis-ci.com/user/languages/ruby/#bundler
+  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem install bundler -v 1.17.2
 script:
   - bundle exec rspec
+
+cache: bundler
+sudo: false
