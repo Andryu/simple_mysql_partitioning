@@ -1,9 +1,12 @@
+require 'activerecord-compatible_legacy_migration'
 host = ENV['MYSQL_DB_HOST'] || '127.0.0.1'
 client = Mysql2::Client.new(host: host, username: 'root', password: '')
+client.query('DROP DATABASE IF EXISTS simple_mysql_partitioning_test;')
 client.query('CREATE DATABASE simple_mysql_partitioning_test;')
 client.close
 
 ActiveRecord::Base.configurations = YAML.load_file('spec/dummy/database.yml')
+ActiveRecord::CompatibleLegacyMigration.config.default_version = 4.2
 config = ActiveRecord::Base.configurations['test']
 config['host'] = host
 ActiveRecord::Base.establish_connection(config)
