@@ -11,6 +11,19 @@ addons:
       - mysql-server
 rvm:
   - 2.5.0
+  - 2.6.0
+  - ruby-head
+
+gemfile:
+  - Gemfile
+  - gemfiles/Gemfile.rails-4.2.6
+  - gemfiles/Gemfile.rails-5.0
+  - gemfiles/Gemfile.rails-6.0
+  - gemfiles/Gemfile.rails-6.1
+
+matrix:
+  allow-failures:
+    - rvm: ruby-head
 bundler_args: --jobs=3 --retry=3
 cache: bundler
 
