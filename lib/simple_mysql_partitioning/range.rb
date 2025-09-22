@@ -8,7 +8,7 @@ module SimpleMySQLPartitioning
       sql = SQL.create_sql(
         table_name,
         klass.partition_config[:column],
-        pairs_name_with_value, true
+        pairs_name_with_value
       )
 
       klass.connection.execute(sql)

@@ -20,11 +20,13 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 2.3.7'
+  spec.required_ruby_version = '>= 3.0'
 
-  spec.add_dependency 'activerecord', '>= 4.2.1'
-  spec.add_development_dependency 'activerecord-compatible_legacy_migration'
-  spec.add_development_dependency 'mysql2', '>= 0.5.0'
-  spec.add_development_dependency 'rake', '>= 10.0'
-  spec.add_development_dependency 'rspec', '>= 3.0'
+  spec.add_dependency 'activerecord', '>= 7.1', '< 8.0'
+
+  spec.add_development_dependency 'mysql2', '>= 0.5.5'
+  spec.add_development_dependency 'rake', '>= 13.0'
+  spec.add_development_dependency 'rspec', '>= 3.13'
+  spec.add_development_dependency 'rubocop', '>= 1.63', '< 2.0'
+  spec.add_development_dependency 'standard', '>= 1.35', '< 2.0'
 end

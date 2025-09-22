@@ -1,3 +1,5 @@
+require 'active_support/core_ext/string/inflections'
+
 module SimpleMySQLPartitioning
   module Adapter
     def self.included(model)

@@ -7,7 +7,6 @@ require 'simple_mysql_partitioning/range'
 require 'simple_mysql_partitioning/base_partitioning'
 
 module SimpleMySQLPartitioning
-  # Your code goes here...
   class << self
     def included(klass)
       klass.send :include, SimpleMySQLPartitioning::Adapter

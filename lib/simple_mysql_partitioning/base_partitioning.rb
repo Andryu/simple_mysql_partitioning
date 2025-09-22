@@ -1,4 +1,5 @@
 require 'active_record'
+require 'active_support/core_ext/object/blank'
 require 'simple_mysql_partitioning/sql'
 
 module SimpleMySQLPartitioning

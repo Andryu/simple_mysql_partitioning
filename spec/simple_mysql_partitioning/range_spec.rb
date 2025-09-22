@@ -13,20 +13,20 @@ RSpec.describe SimpleMySQLPartitioning::Range do
   let(:max_value_partition_name) { 'pmax' }
 
   describe '.partition_by' do
-    it {
+    it do
       expect(DailyReport.respond_to?(:partitioning_by)).to be_truthy
       expect(DailyReport.partition_config[:column]).to eq :day
       expect(DailyReport.partition_config[:type]).to eq :range
-    }
+    end
   end
 
   describe '.partition' do
-    it {
+    it do
       expect(DailyReport.respond_to?(:partition)).to be_truthy
       expect(
         DailyReport.partition.instance_of?(SimpleMySQLPartitioning::Range)
       ).to be_truthy
-    }
+    end
   end
 
   describe '#create' do
@@ -43,6 +43,7 @@ RSpec.describe SimpleMySQLPartitioning::Range do
     context 'MAXVALUEではない' do
       let(:partition_name) { 'p201807' }
       let(:value)          { '2018-08-01' }
+
       it 'has new partition' do
         klass.partition.add([[partition_name, value]])
         expect(klass.partition.exists?(partition_name)).to be_truthy
@@ -51,6 +52,7 @@ RSpec.describe SimpleMySQLPartitioning::Range do
 
     context 'MAXVALUE' do
       let(:value) { 'MAXVALUE' }
+
       it 'has new partition' do
         klass.partition.add([[max_value_partition_name, value]])
         expect(klass.partition.exists?(max_value_partition_name)).to be_truthy
@@ -66,9 +68,7 @@ RSpec.describe SimpleMySQLPartitioning::Range do
 
     before do
       unless klass.partition.exists?(reorganize_partition_name)
-        klass.partition.add(
-          [[reorganize_partition_name, reorganize_partition_value]]
-        )
+        klass.partition.add([[reorganize_partition_name, reorganize_partition_value]])
       end
     end
 
@@ -89,9 +89,11 @@ RSpec.describe SimpleMySQLPartitioning::Range do
   describe '#drop' do
     let(:partition_name) { 'p201808' }
     let(:value)          { '2018-09-01' }
+
     before do
-      klass.partition.add([[partition_name, value]]) \
-        unless klass.partition.exists?(partition_name)
+      unless klass.partition.exists?(partition_name)
+        klass.partition.add([[partition_name, value]])
+      end
     end
 
     it 'dropped partition' do
