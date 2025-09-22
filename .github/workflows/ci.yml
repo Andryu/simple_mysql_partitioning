@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'feature-*'
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.MD'
+      - 'docs/**'
+      - '**/*.adoc'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+      - name: Run StandardRB
+        run: bundle exec standardrb
+
+      - name: Run RSpec
+        run: bundle exec rspec
