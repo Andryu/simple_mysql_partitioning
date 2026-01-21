@@ -5,13 +5,16 @@ client.query('CREATE DATABASE simple_mysql_partitioning_test;')
 client.close
 
 # Rails 6.1+ compatible configuration
+yaml_config = YAML.load_file('spec/dummy/database.yml')
+
 if ActiveRecord.version >= Gem::Version.new('7.1')
   # Rails 7.1+ uses a different configuration system
-  ActiveRecord::Base.configurations = ActiveRecord::DatabaseConfigurations.new(YAML.load_file('spec/dummy/database.yml'))
-  config = ActiveRecord::Base.configurations.configs_for(env_name: 'test').first.configuration_hash
+  db_configs = ActiveRecord::DatabaseConfigurations.new(yaml_config)
+  ActiveRecord::Base.configurations = db_configs
+  config = db_configs.configs_for(env_name: 'test').first.configuration_hash.dup
 else
-  ActiveRecord::Base.configurations = YAML.load_file('spec/dummy/database.yml')
-  config = ActiveRecord::Base.configurations['test']
+  ActiveRecord::Base.configurations = yaml_config
+  config = yaml_config['test'].dup
 end
 
 config['host'] = host
