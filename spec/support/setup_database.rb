@@ -6,8 +6,9 @@ client.close
 
 # Rails 6.1+ compatible configuration
 require 'erb'
+require 'yaml'
 yaml_content = ERB.new(File.read('spec/dummy/database.yml')).result
-yaml_config = YAML.load(yaml_content)
+yaml_config = YAML.safe_load(yaml_content, aliases: true)
 
 if ActiveRecord.version >= Gem::Version.new('7.1')
   # Rails 7.1+ uses a different configuration system
