@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.0', '3.1', '3.2', '3.3']
+        rails: ['6.1', '7.0', '7.1', '7.2']
+        exclude:
+          # Rails 7.2 requires Ruby 3.1+
+          - ruby: '3.0'
+            rails: '7.2'
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/Gemfile.rails-${{ matrix.rails }}
+      MYSQL_DB_HOST: 127.0.0.1
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libmysqlclient-dev
+
+    - name: Bundle install
+      run: bundle install --jobs 4 --retry 3
+
+    - name: Wait for MySQL
+      run: |
+        until mysqladmin ping -h 127.0.0.1 --silent; do
+          echo 'waiting for mysql...'
+          sleep 1
+        done
+
+    - name: Run tests
+      run: bundle exec rspec
+
+    - name: Upload coverage
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-${{ matrix.ruby }}-rails-${{ matrix.rails }}
+        path: coverage/
+        if-no-files-found: ignore
