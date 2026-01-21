@@ -1,17 +1,29 @@
 # SimpleMysqlPartitioning
 
-[![Build Status](https://travis-ci.org/Andryu/simple_mysql_partitioning.svg?branch=master)](https://travis-ci.org/Andryu/simple_mysql_partitioning)
+[![CI](https://github.com/Andryu/simple_mysql_partitioning/actions/workflows/ci.yml/badge.svg)](https://github.com/Andryu/simple_mysql_partitioning/actions/workflows/ci.yml)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/simple_mysql_partitioning`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby gem that provides simple MySQL table partitioning functionality for ActiveRecord models. This gem allows you to easily manage RANGE partitions in MySQL databases through an intuitive Ruby API.
 
-TODO: Delete this and the text above, and describe your gem
+## Requirements
+
+- Ruby 3.0 or higher
+- Rails/ActiveRecord 6.1 or higher
+- MySQL 8.0 or higher
+
+## Compatibility
+
+This gem is tested against:
+
+- Ruby: 3.0, 3.1, 3.2, 3.3
+- Rails: 6.1, 7.0, 7.1, 7.2
+- MySQL: 8.0
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simple_mysql_partitioning', '~> 1.0.0'
+gem 'simple_mysql_partitioning', '~> 2.0'
 ```
 
 And then execute:
@@ -70,8 +82,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ### How to test for local
 
 ```
-BUNDLE_GEMFILE=gemfiles/Gemfile** bundle exec rspec
-ex) BUNDLE_GEMFILE=gemfiles/Gemfile.rails-6.0 bundle exec rspec
+BUNDLE_GEMFILE=gemfiles/Gemfile.rails-** bundle exec rspec
+ex) BUNDLE_GEMFILE=gemfiles/Gemfile.rails-7.0 bundle exec rspec
 ```
 
 ## Contributing
