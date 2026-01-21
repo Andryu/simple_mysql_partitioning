@@ -66,7 +66,7 @@ jobs:
 
     - name: Upload coverage
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-${{ matrix.ruby }}-rails-${{ matrix.rails }}
         path: coverage/
