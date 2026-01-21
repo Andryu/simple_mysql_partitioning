@@ -51,6 +51,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libmysqlclient-dev
 
+    - name: Debug environment
+      run: |
+        echo "BUNDLE_GEMFILE=$BUNDLE_GEMFILE"
+        echo "Ruby version: $(ruby -v)"
+        echo "Bundler version: $(bundle -v)"
+        ls -la gemfiles/
+        cat "$BUNDLE_GEMFILE"
+
     - name: Bundle install
       run: bundle install --jobs 4 --retry 3
 
