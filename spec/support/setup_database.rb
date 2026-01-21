@@ -5,7 +5,9 @@ client.query('CREATE DATABASE simple_mysql_partitioning_test;')
 client.close
 
 # Rails 6.1+ compatible configuration
-yaml_config = YAML.load_file('spec/dummy/database.yml')
+require 'erb'
+yaml_content = ERB.new(File.read('spec/dummy/database.yml')).result
+yaml_config = YAML.load(yaml_content)
 
 if ActiveRecord.version >= Gem::Version.new('7.1')
   # Rails 7.1+ uses a different configuration system
