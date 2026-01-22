@@ -8,8 +8,12 @@ client.close
 require 'erb'
 require 'yaml'
 yaml_content = ERB.new(File.read('spec/dummy/database.yml')).result
-# ERB-evaluated YAML is trusted, use Psych for compatibility across Ruby 3.0+
-yaml_config = Psych.load(yaml_content)
+# For Ruby 3.0+, use YAML.unsafe_load for ERB-evaluated YAML
+if YAML.respond_to?(:unsafe_load)
+  yaml_config = YAML.unsafe_load(yaml_content)
+else
+  yaml_config = YAML.load(yaml_content)
+end
 
 if ActiveRecord.version >= Gem::Version.new('7.1')
   # Rails 7.1+ uses a different configuration system
