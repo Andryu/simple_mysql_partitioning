@@ -15,7 +15,9 @@ if ActiveRecord.version >= Gem::Version.new('7.1')
   # Rails 7.1+ uses a different configuration system
   db_configs = ActiveRecord::DatabaseConfigurations.new(yaml_config)
   ActiveRecord::Base.configurations = db_configs
-  config = db_configs.configs_for(env_name: 'test').first.configuration_hash.dup
+  test_config = db_configs.configs_for(env_name: 'test').first
+  raise 'No test database configuration found' unless test_config
+  config = test_config.configuration_hash.dup
 else
   ActiveRecord::Base.configurations = yaml_config
   config = yaml_config['test'].dup

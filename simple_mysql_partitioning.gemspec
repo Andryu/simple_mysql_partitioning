@@ -4,7 +4,7 @@ require 'simple_mysql_partitioning/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'simple_mysql_partitioning'
-  spec.version       = SimpleMysqlParitioning::VERSION
+  spec.version       = SimpleMySQLPartitioning::VERSION
   spec.authors       = ['Shunsuke Andoh']
   spec.email         = ['shunsuke.andoh@gmail.com']
 

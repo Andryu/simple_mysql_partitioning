@@ -1,3 +1,3 @@
-module SimpleMysqlParitioning
+module SimpleMySQLPartitioning
   VERSION = '2.0.0'.freeze
 end
