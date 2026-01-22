@@ -14,7 +14,7 @@ module SimpleMySQLPartitioning
     def exists?(partition_name)
       klass.connection.select_all(
         SQL.exists_sql(table_name, partition_name)
-      ).to_hash.present?
+      ).any?
     end
 
     def drop(partition_name)
