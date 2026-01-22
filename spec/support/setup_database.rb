@@ -25,14 +25,17 @@ config['host'] = host
 ActiveRecord::Base.establish_connection(config)
 
 # Rails 6.1+ compatible migration
-# Use versioned migration for better compatibility
+# Create table without primary key, then add composite primary key
 class CreateAllTables < ActiveRecord::Migration[6.1]
   def self.up
-    create_table(:daily_reports, id: false, primary_key: %i[id day]) do |t|
-      t.integer :id
-      t.date   :day
+    create_table(:daily_reports, id: false) do |t|
+      t.integer :id, null: false
+      t.date   :day, null: false
       t.text   :imp
     end
+
+    # Add composite primary key using raw SQL (works across all Rails 6.1+)
+    execute 'ALTER TABLE daily_reports ADD PRIMARY KEY (id, day)'
   end
 end
 
