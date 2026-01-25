@@ -1,4 +1,5 @@
 require 'active_record'
+require 'active_support/core_ext/object/blank'
 require 'simple_mysql_partitioning/sql'
 
 module SimpleMySQLPartitioning
@@ -13,7 +14,7 @@ module SimpleMySQLPartitioning
     def exists?(partition_name)
       klass.connection.select_all(
         SQL.exists_sql(table_name, partition_name)
-      ).to_hash.present?
+      ).any?
     end
 
     def drop(partition_name)

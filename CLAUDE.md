@@ -6,8 +6,9 @@
 
 ### テスト
 - テスト実行: `bundle exec rake spec` または `bundle exec rspec`
-- 特定のRailsバージョンでのテスト実行: `BUNDLE_GEMFILE=gemfiles/Gemfile.rails-6.0 bundle exec rspec`
-- 利用可能なRailsバージョン: 4.2.1, 5.0, 6.0 (gemfilesディレクトリを参照)
+- 特定のRailsバージョンでのテスト実行: `BUNDLE_GEMFILE=gemfiles/Gemfile.rails-7.0 bundle exec rspec`
+- 利用可能なRailsバージョン: 6.1, 7.0, 7.1, 7.2 (gemfilesディレクトリを参照)
+- レガシーサポート: Rails 4.2.1, 5.0, 6.0用のGemfileも存在しますが、非推奨です
 
 ### 開発
 - 依存関係のインストール: `bundle install`
@@ -55,9 +56,11 @@
 - `drop(name)`: パーティションの削除
 
 ### データベース要件
-- MySQL 5.7+が必要 (docker-compose.ymlで指定)
+- MySQL 8.0+が必要 (docker-compose.ymlで指定)
 - データベース接続にmysql2 gemを使用
 - ActiveRecord接続処理と統合
+- 最小Ruby要件: 3.0.0+
+- 最小ActiveRecord要件: 6.1.0+
 
 ### テストインフラストラクチャ
 - データベースセットアップ・ティアダウン付きRSpecテストスイート

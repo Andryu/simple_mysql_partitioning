@@ -2,7 +2,7 @@ module SimpleMySQLPartitioning
   class SQL
 
     PARTITION_RANGE_LESS_VALUE =
-      'PARTITION %{name} VALUES LESS THAN ("%{value}")'.freeze
+      'PARTITION %{name} VALUES LESS THAN (\'%{value}\')'.freeze
 
     class << self
       def exists_sql(table_name, partition_name)
