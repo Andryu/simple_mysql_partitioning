@@ -1,4 +1,6 @@
 require 'bundler/setup'
+# Rails 6.1 requires explicit ActiveSupport initialization before loading gems
+require 'active_support/all'
 require 'simple_mysql_partitioning'
 
 RSpec.configure do |config|
