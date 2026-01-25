@@ -1,5 +1,4 @@
 require 'simple_mysql_partitioning/version'
-require 'active_support/all'
 require 'active_record'
 require 'mysql2'
 require 'simple_mysql_partitioning/adapter'
