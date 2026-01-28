@@ -1,4 +1,7 @@
 require 'simple_mysql_partitioning/version'
+# Explicitly require logger for concurrent-ruby 1.3.5+ compatibility with Rails 6.1/7.0
+# concurrent-ruby 1.3.5+ removed its logger dependency, which ActiveSupport assumes is loaded
+require 'logger'
 require 'active_record'
 require 'mysql2'
 require 'simple_mysql_partitioning/adapter'
