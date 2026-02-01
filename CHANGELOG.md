@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-01-31
+
+### Added
+
+- Rails 8.0サポートを追加
+  - Ruby 3.2および3.3でRails 8.0のテストに対応
+  - `gemfiles/Gemfile.rails-8.0`を追加
+  - CIテストマトリックスにRails 8.0を追加
+- Rails 8.0は Ruby 3.2以上が必要（CI設定で適切に除外）
+
+### Changed
+
+- `activerecord`の依存関係を`< 8.0`から`< 9.0`に更新
+- `activesupport`の依存関係を`< 8.0`から`< 9.0`に更新
+
+### テスト済み構成
+
+- Ruby 3.0: Rails 6.1, 7.0, 7.1
+- Ruby 3.1: Rails 6.1, 7.0, 7.1, 7.2
+- Ruby 3.2: Rails 6.1, 7.0, 7.1, 7.2, **8.0**
+- Ruby 3.3: Rails 6.1, 7.0, 7.1, 7.2, **8.0**
+
+### 注意事項
+
+- Rails 6.1〜7.2との完全な後方互換性を維持
+- 既存ユーザーへの破壊的変更なし
+
+---
+
 ## [2.0.0] - 2026-01-21
 
 ### ⚠️ BREAKING CHANGES
@@ -140,5 +169,6 @@ If you encounter issues during migration:
 - Support for Rails 4.2.1+
 - Support for MySQL 5.7+
 
+[2.1.0]: https://github.com/Andryu/simple_mysql_partitioning/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/Andryu/simple_mysql_partitioning/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/Andryu/simple_mysql_partitioning/releases/tag/v1.0.0
